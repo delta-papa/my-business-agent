@@ -4,9 +4,11 @@ from llama_index.llms.groq import Groq
 from llama_index.embeddings.ollama import OllamaEmbedding
 from llama_index.core import Settings
 import os
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
 
 Settings.llm = Groq(model="llama-3.3-70b-versatile", api_key=os.environ.get("GROQ_API_KEY"))
-Settings.embed_model = OllamaEmbedding(model_name="nomic-embed-text")
+#Settings.embed_model = OllamaEmbedding(model_name="nomic-embed-text")
 
 storage_context = StorageContext.from_defaults(persist_dir="storage")
 index = load_index_from_storage(storage_context)
